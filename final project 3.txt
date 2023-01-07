@@ -1,0 +1,38 @@
+1
+****quere show artist name and his ID and the total of albums****
+select Artist.name,count(title) as counter_ofalbum
+from Artist
+join Album on Artist.ArtistId=Album.ArtistId
+group by (Artist.name),(Artist.ArtistId)
+order by 1
+-------------------------------------------------------
+2
+****quere show customer name,country,city and total of billing >10****
+
+select Customer.FirstName,Customer.Country,Customer.City,Invoice.BillingState as Billing,max(total)as MAXIMIM_Total
+FROM Customer
+join Invoice on Invoice.CustomerId=Customer.CustomerId
+where total > 10 and BillingState is not NULL
+GROUP by Customer.CustomerId
+order by 3 DESC,2 DESC
+--------------------------------------------------------------
+3
+****quere shows The number of bills issued by the city****
+
+select Customer.CustomerId,FirstName,count(BillingCity)
+from Customer
+join Invoice on Customer.CustomerId=Invoice.CustomerId
+GROUP by BillingCity
+limit 20
+
+---------------------------------------------------------------------
+4
+****quere show track,ID,madiyname,total of bytes ****
+
+select Track.name as name_of_track,Track.TrackId, MediaType.Name as Medianame,Composer,sum(Bytes)as total_bytes
+from Track
+join MediaType on MediaType.MediaTypeId=Track.TrackId
+where Composer is not NULL
+GROUP by TrackId
+order by 1
+
